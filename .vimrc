@@ -1,5 +1,6 @@
 call plug#begin()
 " Plugins aqui
+ Plug 'sainnhe/sonokai'
  Plug 'ghifarit53/tokyonight-vim'
  Plug 'vim-airline/vim-airline'
  Plug 'vim-airline/vim-airline-themes'
@@ -11,11 +12,16 @@ call plug#begin()
  Plug 'vim-syntastic/syntastic'
  Plug 'ctrlpvim/ctrlp.vim'
  Plug 'preservim/nerdcommenter'
- 
+ Plug 'Yggdroot/indentLine' 
+ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+ Plug 'Xuyuanp/nerdtree-git-plugin'
+ Plug 'vim/colorschemes'
 call plug#end()
 
 
 " Global Sets """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ai
+colorscheme 
 syntax on            " Enable syntax highlight
 set nu               " Enable line numbers
 set tabstop=4        " Show existing tab with 4 spaces width
@@ -28,8 +34,7 @@ set hidden           " Hides the current buffer when a new file is openned
 set incsearch        " Incremental search
 set ignorecase       " Ingore case in search
 set smartcase        " Consider case if there is a upper case character
-set scrolloff=8      " Minimum number of lines to keep above and below the cursor
-set colorcolumn=100  " Draws a line at the given line to keep aware of the line size
+set scrolloff=8      " Minimum number of lines to keep above and below the curso
 set signcolumn=yes   " Add a column on the left. Useful for linting
 set cmdheight=2      " Give more space for displaying messages
 set updatetime=100   " Time in miliseconds to consider the changes
@@ -53,9 +58,10 @@ filetype indent on   " Load the indent file for the file type, if any
 
 
 " Remaps """"""""""
-nmap <C-a> :NERDTreeToggle<CR>
 nmap <C-z> :u<CR>
 nmap <C-s> :w<CR>
+nmap <C-c> :yy<CR>
+nmap <C-v> :p<CR>
 
 " Shortcuts for split navigation
 map <C-h> <C-w>h
@@ -93,22 +99,25 @@ autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 
 
 " AirLine """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1 
 let g:airline_powerline_fonts = 1
-
 
 
 
 " Themes """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set termguicolors
 
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
 
 colorscheme tokyonight
 
 let g:lightline = {'colorscheme' : 'tokyonight'}
-let g:airline_theme = "tokyonight"
+let g:airline_theme = "sonokai"
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldlevel=99
@@ -121,18 +130,17 @@ map <c-k>i :IndentLinesToggle<cr>
 
 map <C-n> :NERDTreeToggle<cr>
 set encoding=utf8
-set guifont=Anonymice\ Nerd\ Font\ Mono:h12
 
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_statusline_ontop=0
-let g:airline_theme='base16_twilight'
+let g:airline_theme='sonokai'
 
 let g:airline#extensions#tabline#formatter = 'default'
 " navegação entre os buffers
-nnoremap <M-Right> :bn<cr>
-nnoremap <M-Left> :bp<cr>
+nnoremap <C-Right> :bn<cr>
+nnoremap <C-Left> :bp<cr>
 nnoremap <c-x> :bp\|bd #<cr>
 
 let g:ctrlp_custom_ignore = '\v[\/]\.(swp|zip)$'
@@ -141,7 +149,7 @@ let g:ctrlp_show_hidden = 1
 
 filetype plugin on
 let g:NERDSpaceDelims = 1
-let g:NERDDefaultAlign = 'left'
+let g:NERDDefaultAlign = 'right':
 map cc <Plug>NERDCommenterInvert
 
 let g:ale_linters = {'python': ['flake8', 'pylint'], 'javascript': ['eslint']}
